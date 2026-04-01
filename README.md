@@ -2,20 +2,127 @@
 
 [简体中文](./README.zh-CN.md) | [English](./README.en.md)
 
-DevTrace is a standalone skill package extracted from the completed DevTrace work.  
-It focuses on turning raw development conversations and process records into structured summaries with traceable evidence.
+DevTrace 用于将开发过程中的原始记录整理为结构化结果，帮助用户从聊天记录、需求讨论、调试过程和任务推进材料中提炼主线脉络、关键节点、核心内容及原文证据。
 
-Repository contents:
+适用于以下场景：
 
-- `devtrace/` — the skill itself
-  - `SKILL.md` for the agent-facing instructions
-  - `README.md` for the human-facing skill overview
-  - `references/` for workflow, schema, prompt notes, and examples
+- 整理开发聊天记录
+- 复盘需求推进过程
+- 提炼调试与排障主线
+- 从长文本讨论中抽取关键结论
+- 生成适合归档、复盘和分享的结构化总结
 
-Use this repository when you want an AI/agent to:
+---
 
-- organize development chat records
-- reconstruct the main workflow
-- extract key turning points
-- retain evidence from the original text
-- export structured Markdown/TXT summaries
+## 功能概览
+
+DevTrace 提供以下能力：
+
+- **主线脉络整理**：从原始记录中恢复任务推进路径
+- **关键节点提炼**：识别问题暴露、方案比较、方向切换、结果确认等关键转折
+- **核心内容提取**：提炼需要长期保留的结论、决策、风险和后续动作
+- **原文证据关联**：为重要结论保留可追溯的文本依据
+- **结构化导出**：输出适合保存和分享的 Markdown / TXT 内容
+
+---
+
+## 输入类型
+
+DevTrace 适合处理以下输入：
+
+- `.md` 聊天记录
+- `.txt` 聊天记录
+- 需求讨论文本
+- 调试过程记录
+- 项目复盘材料
+- 多段按时间排列的开发过程文本
+
+---
+
+## 输出内容
+
+默认输出包括：
+
+1. 会话主题
+2. 总体总结
+3. 主线脉络
+4. 关键节点
+5. 核心内容
+6. 原文证据
+7. Markdown / TXT 导出内容（按需生成）
+
+---
+
+## 使用方式
+
+在支持 DevTrace 的环境中，可以直接通过名称调用。
+
+### 示例 1：整理开发聊天记录
+
+```text
+/devtrace 帮我整理这段开发聊天记录，提炼主线脉络、关键节点和原文证据
+```
+
+### 示例 2：复盘调试过程
+
+```text
+/devtrace 把这份调试记录整理成复盘摘要，重点说明问题出现、方案尝试、失败转折和最终收敛过程
+```
+
+### 示例 3：输出适合归档的总结
+
+```text
+/devtrace 根据这份需求推进记录生成结构化 Markdown，总结背景、主线、关键结论和后续动作
+```
+
+### 示例 4：压缩为演示版本
+
+```text
+/devtrace 从这份长聊天里提炼适合演示展示的主线流程，尽量少而准
+```
+
+如果当前环境不支持 `/devtrace` 形式，也可以直接使用自然语言描述任务，例如：
+
+- 帮我用 DevTrace 整理这段开发记录
+- 用 DevTrace 提炼这份讨论的主线脉络
+- 用 DevTrace 输出一份结构化总结
+
+---
+
+## 仓库结构
+
+```text
+DevTrace/
+├─ README.md
+├─ README.zh-CN.md
+├─ README.en.md
+└─ devtrace/
+   ├─ SKILL.md
+   ├─ README.md
+   ├─ agents/
+   │  └─ openai.yaml
+   └─ references/
+      ├─ workflow.md
+      ├─ output-schema.md
+      ├─ prompt-notes.md
+      └─ examples.md
+```
+
+---
+
+## 适用目标
+
+DevTrace 适合以下用途：
+
+- 将零散开发记录整理为可读结果
+- 为需求、实现、调试过程建立复盘材料
+- 在长讨论文本中快速提炼有效信息
+- 为归档、团队同步和后续分析准备结构化内容
+
+---
+
+## 说明
+
+DevTrace 当前聚焦于“开发过程整理”这一核心任务。
+
+重点不是生成代码，而是把已经发生的开发过程整理清楚、表达准确、保留依据，并输出便于复盘和传播的结果。
