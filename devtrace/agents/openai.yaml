@@ -1,0 +1,4 @@
+interface:
+  display_name: "DevTrace"
+  short_description: "整理开发过程记录、主线脉络、证据总结与导出辅助技能"
+  default_prompt: "帮我整理这段开发过程记录，提炼主线脉络、关键节点、核心内容和原文证据，并输出结构化总结。"
