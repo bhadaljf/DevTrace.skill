@@ -1,4 +1,4 @@
-# DevTrace
+# DevTrace.skill
 
 [English](./README.en.md) | [Design](./DESIGN.md)
 
