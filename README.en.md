@@ -1,128 +1,188 @@
 # DevTrace
 
-[简体中文](./README.zh-CN.md)
+[Simplified Chinese](./README.md) | [Design](./DESIGN.md)
 
-DevTrace converts raw development records into structured outputs. It helps extract the main workflow, key turning points, core takeaways, and traceable evidence from chat logs, requirement discussions, debugging records, and project progress materials.
+## Overview
 
-Typical use cases:
+DevTrace is a project for long-running work. It captures key information from chats, discussions, debugging, experiments, and reviews into event units that can be tracked across time, helping AI reconnect to context across future sessions, keep following the same event, preserve work details, and support daily, weekly, monthly, and scheduled stage records.
 
-- organizing development chat records
-- reviewing requirement progress
-- reconstructing debugging and troubleshooting workflows
-- extracting key conclusions from long discussions
-- generating structured summaries for archiving, review, and sharing
+Across the project, there are four core elements:
 
----
+* `01_CURRENT.md`: records the current state, usually including the current thread, current problem, current blocker, next step, and recent changes.
+* `00_INDEX.md`: the generated-content index, usually including the date, generated content entry, one-line summary, and tags. It helps quickly review what was generated recently and decide which records or events to read next.
+* `TraceUnit`: records event facts, usually including a title, one-line summary, details, evidence, status, and tags. It keeps a large event organized as a whole and supports cross-time tracing.
+* `tag`: topic labels, mainly written in `TraceUnit` and also shown in `00_INDEX.md`, so related events can be filtered quickly by topic.
 
-## Features
+## Design
 
-DevTrace provides the following capabilities:
+### `01_CURRENT.md`
 
-- **Workflow reconstruction**: rebuild the main progression path from raw records
-- **Key turning point extraction**: identify issue exposure, option comparisons, direction shifts, and result confirmations
-- **Core takeaway extraction**: retain decisions, conclusions, risks, and follow-up actions worth preserving
-- **Evidence linking**: keep important conclusions traceable to the original text
-- **Structured export**: produce Markdown / TXT content suitable for saving and sharing
+Current-state entry. It lets you quickly see where the work stands now.
 
----
+Typical content:
 
-## Supported Inputs
+- current thread
+- current problem
+- current blocker
+- next step
+- recent changes
 
-DevTrace is suitable for:
+Example:
 
-- `.md` chat records
-- `.txt` chat records
-- requirement discussion text
-- debugging process records
-- project review materials
-- development process text arranged in chronological order
+```md
+# 01_CURRENT
 
----
+## Current Thread
+- session-loader
 
-## Outputs
+## Current Problem
+- the filtering rules for relevant content are still unstable
 
-Default outputs include:
+## Current Blocker
+- a new session still does not know which units to read first
 
-1. Session theme
-2. Overall summary
-3. Main workflow
-4. Key turning points
-5. Core takeaways
-6. Source evidence
-7. Markdown / TXT export content when needed
+## Next Step
+- fix the reading order as current -> index -> relevant content
 
----
+## Recent Changes
+- 2026-04-03: reading order clarified
+- 2026-04-02: loader-related filtering rules expanded
+```
+
+### `00_INDEX.md`
+
+Generated-content entry. AI usually reads this after current to quickly see what was generated recently.
+
+Typical content:
+
+- date
+- generated content entry
+- one-line summary
+- tag
+
+Example:
+
+```md
+# 00_INDEX
+
+- [2026](#2026)
+  - [2026-04](#2026-04)
+
+## 2026
+
+### 2026-04
+
+- 2026-04-03 [reviews/session/2026-04-03-loader-summary.md] Session summary: a new session can enter from current and index first, then read related content as needed. #loader #design #session-summary
+- 2026-04-03 [reviews/daily/2026-04-03.md] Daily review: the next step has been confirmed as fixing the reading order to current -> index -> relevant content. #loader #design #daily
+- 2026-04-02 [reviews/session/2026-04-02-loader-summary.md] Session summary: the session loader still cannot stably filter related content. #loader #session-summary
+```
+
+The one-line summary here can be written by the user or by AI.
+
+### TraceUnit
+
+This is the core record object of the project. `TraceUnit` records events worth continuing to track across time. By default, one large event is captured as one unit. In many cases, `problem / attempt / decision / next-step / result` are only parts inside the same unit. They are better split into a new unit only when they become a new independent state node worth loading again in the future.
+
+A simple rule:
+
+- if the work will keep following this event later, it usually deserves a unit
+- if it is only extra detail inside the same event, it usually belongs in an existing unit
+
+### Tag
+
+Topic labels. They are mainly written in `TraceUnit` and also shown in `00_INDEX.md`. AI uses `tag / thread / date / status / affects_current` together to filter related events.
+
+Current built-in common tags:
+
+`meeting / experiment / debug / review / documentation / automation / design / loader`
+
+Users can create new tags themselves, and AI can also add new tags based on the actual situation.
+
+### Reading Order
+
+AI usually reads in the order of `01_CURRENT.md -> 00_INDEX.md -> relevant content / TraceUnit`. It first uses current to recover the present state, then uses index to locate recently generated content, and finally continues with related summaries, reviews, daily/weekly/monthly reports, or further enters the truly relevant event units to read details.
 
 ## Usage
 
-In environments that support DevTrace directly, you can call it by name.
+### 1. Record
 
-### Example 1: Organize development chat records
+Skill usage:
 
-```text
-/devtrace Organize this development chat record and extract the main workflow, key turning points, and source evidence
-```
+- `/skill devtrace record the current session`
+- `$devtrace record the current progress`
 
-### Example 2: Review a debugging process
+Say to AI:
 
-```text
-/devtrace Turn this debugging record into a review summary, focusing on the initial issue, attempted solutions, failure turning points, and the final convergence
-```
+- `Use DevTrace to record this round of work / write this round of loader progress into DevTrace / record this blocker in DevTrace`
 
-### Example 3: Generate an archive-ready summary
+### 2. Continue
 
-```text
-/devtrace Generate a structured Markdown summary from this requirement progress record, including background, workflow, key conclusions, and follow-up actions
-```
+Skill usage:
 
-### Example 4: Compress for demo presentation
+- `/skill devtrace continue the previous loader event`
+- `$devtrace continue this event`
 
-```text
-/devtrace Extract a concise main workflow from this long conversation for demo presentation
-```
+Say to AI:
 
-If the current environment does not support the `/devtrace` form, natural language requests also work, for example:
+- `Continue the previous loader event with DevTrace / append this new progress to the last event / this is still the same issue, write it back to the original TraceUnit`
 
-- Use DevTrace to organize this development record
-- Use DevTrace to extract the workflow from this discussion
-- Use DevTrace to produce a structured summary
+### 3. Load
 
----
+Skill usage:
 
-## Repository Structure
+- `/skill devtrace load the current project context`
+- `$devtrace read current and index`
+
+Say to AI:
+
+- `Use DevTrace to load the current project context / read DevTrace current and index first / use DevTrace to reconnect me to this project`
+
+### 4. Search
+
+Skill usage:
+
+- `/skill devtrace find loader-related events`
+- `$devtrace find related events`
+
+Say to AI:
+
+- `Use DevTrace to find loader-related events / check recent design changes / trace the before-and-after changes of this event`
+
+### 5. Review
+
+Skill usage:
+
+- `/skill devtrace generate this week's weekly report`
+- `$devtrace set a weekly report every Friday`
+
+Say to AI:
+
+- `Use DevTrace to generate today's daily report / generate this month's review / from now on generate a daily report with DevTrace every day at 9 PM / generate a weekly report with DevTrace every Friday afternoon`
+
+Generated daily, weekly, and monthly report files are usually placed under `reviews/` in the project directory, such as `reviews/daily/`, `reviews/weekly/`, and `reviews/monthly/`.
+
+## File Structure
 
 ```text
 DevTrace/
+├─ DESIGN.md
 ├─ README.md
-├─ README.zh-CN.md
-├─ README.en.md
-└─ devtrace/
-   ├─ SKILL.md
-   ├─ README.md
-   ├─ agents/
-   │  └─ openai.yaml
-   └─ references/
-      ├─ workflow.md
-      ├─ output-schema.md
-      ├─ prompt-notes.md
-      └─ examples.md
+├─ devtrace/
+│  ├─ SKILL.md
+│  ├─ agents/
+│  ├─ references/
+│  ├─ assets/
+│  └─ scripts/
 ```
 
----
+- `DESIGN.md`: design document
+- `devtrace/SKILL.md`: AI execution rules
+- `01_CURRENT.md`: current-state entry
+- `00_INDEX.md`: generated-content entry
+- `trace/`: TraceUnit storage directory
 
-## Intended Uses
+If you want to understand the architecture in more detail, see [DESIGN.md](./DESIGN.md).
 
-DevTrace is designed to:
+If you like the project, a star is welcome ⭐
 
-- convert scattered development records into readable outputs
-- prepare review materials for requirement, implementation, and debugging processes
-- extract effective information from long-form discussions
-- provide structured content for archiving, team sync, and later analysis
-
----
-
-## Notes
-
-DevTrace currently focuses on one core task: structuring development process records.
-
-Its purpose is not to generate code, but to make existing development processes clear, accurate, traceable, and suitable for review and communication.
+Have a great day.(´▽`ʃ♡ƪ)

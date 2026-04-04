@@ -1,0 +1,26 @@
+id: TU-YYYY-MM-DD-001
+project: demo
+date: YYYY-MM-DD
+title: 
+
+source_type: 
+source_ref: 
+raw_refs: []
+
+unit_type: 
+thread: 
+tags: []
+
+summary: 
+details: 
+evidence: []
+
+status: candidate
+affects_current: false
+importance: medium
+confidence: 0.70
+
+prev: []
+next: []
+related: []
+supersedes: []

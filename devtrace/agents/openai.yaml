@@ -1,4 +1,4 @@
 interface:
   display_name: "DevTrace"
-  short_description: "整理开发过程记录、主线脉络、证据总结与导出辅助技能"
-  default_prompt: "帮我整理这段开发过程记录，提炼主线脉络、关键节点、核心内容和原文证据，并输出结构化总结。"
+  short_description: "把项目推进事件沉淀为可持续追踪的 TraceUnit，并维护 current、生成内容索引与定时回顾。"
+  default_prompt: "使用 $devtrace 处理这个项目：先读取 current 与 index，再判断当前会话是新事件还是旧事件续写，按需写回 TraceUnit；如果本轮生成了会话总结、review 或日报周报月报，再更新 index，并按需更新 current；如果用户要求定时生成日报、周报或月报，则创建 AI 自动任务并让结果持续写回 reviews 与 index。"

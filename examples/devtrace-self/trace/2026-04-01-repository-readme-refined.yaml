@@ -1,0 +1,37 @@
+id: TU-2026-04-01-002
+project: devtrace-self
+date: 2026-04-01
+title: 仓库 README 调整为 DevTrace 项目说明并补充双语入口
+
+source_type: repository
+source_ref: README.md
+raw_refs:
+  - README.md
+  - README.md
+  - README.en.md
+
+unit_type: result
+thread: repository
+tags:
+  - repo
+  - documentation
+  - bilingual
+
+summary: 根 README 从偏 Skill 说明调整为 DevTrace 项目说明，并补齐中英双语切换，明确了对外展示口径。
+details: |
+  这一步主要解决“README 过于像 Skill 内部说明”的问题，使仓库首页更像正式项目入口。
+  虽然它不是核心分割能力本身，但为后续统一对外叙事打下了基础。
+evidence:
+  - 提交记录 “Refine repository README and bilingual docs”
+
+status: done
+affects_current: false
+importance: medium
+confidence: 0.84
+
+prev:
+  - TU-2026-04-01-001
+next:
+  - TU-2026-04-02-001
+related: []
+supersedes: []

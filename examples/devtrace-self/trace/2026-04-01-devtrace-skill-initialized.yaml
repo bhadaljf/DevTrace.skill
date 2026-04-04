@@ -1,0 +1,36 @@
+id: TU-2026-04-01-001
+project: devtrace-self
+date: 2026-04-01
+title: DevTrace Skill 仓库创建并完成第一版独立封装
+
+source_type: repository
+source_ref: repository://devtrace-skill
+raw_refs:
+  - devtrace/SKILL.md
+  - devtrace/references/workflow.md
+
+unit_type: result
+thread: repository
+tags:
+  - skill
+  - repository
+  - initialization
+
+summary: DevTrace 的 Skill 版从独立目录起步，完成了最早一版封装与基础文档，形成了与 Web 独立维护的项目结构。
+details: |
+  这一步的重点是把 Skill 部分从 Web 部分中拆出来，建立独立仓库与基础文档结构。
+  此时 Skill 仍偏向“开发记录整理与总结”，还没有完全转向“分割系统”定位。
+evidence:
+  - 2026-04-01 创建了独立的 Skill 仓库目录与初版文档
+  - 当前仓库最早提交为 “Initial commit: add DevTrace skill package”
+
+status: done
+affects_current: false
+importance: medium
+confidence: 0.88
+
+prev: []
+next:
+  - TU-2026-04-01-002
+related: []
+supersedes: []
