@@ -102,6 +102,28 @@ Users can create new tags themselves, and AI can also add new tags based on the 
 
 AI usually reads in the order of `01_CURRENT.md -> 00_INDEX.md -> relevant content / TraceUnit`. It first uses current to recover the present state, then uses index to locate recently generated content, and finally continues with related summaries, reviews, daily/weekly/monthly reports, or further enters the truly relevant event units to read details.
 
+### Flow
+
+```mermaid
+flowchart TD
+    A["Start<br/>current session / external material / user request"]
+    B["AI understands the current content"]
+    C["Decide: new event or continuation of an existing event"]
+    D["Write / extend TraceUnit"]
+    E["Update 01_CURRENT.md when needed"]
+    F["If a summary / review / daily / weekly / monthly output is generated<br/>create the corresponding file"]
+    G["Write generated content into 00_INDEX.md"]
+    H["End"]
+
+    A --> B
+    B --> C
+    C --> D
+    D --> E
+    E --> F
+    F --> G
+    G --> H
+```
+
 ## Usage
 
 ### 1. Record
