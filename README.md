@@ -110,6 +110,27 @@ AI 一般
 * 相关总结
 * 带对应 tag 的 **`TraceUnit`**
 
+### 流程
+
+```mermaid
+flowchart TD
+    A["开始<br/>当前会话 / 外部材料 / 用户请求"]
+    B["AI 理解当前内容"]
+    C["判断：新事件 or 旧事件续写"]
+    D["写入 / 续写 TraceUnit"]
+    E["按需更新 01_CURRENT.md"]
+    F["如果生成了总结 / review / 日报周报月报<br/>则生成对应文件"]
+    G["把生成内容写入 00_INDEX.md"]
+    H["结束"]
+
+    A --> B
+    B --> C
+    C --> D
+    D --> E
+    E --> F
+    F --> G
+    G --> H
+```
 
 ## 使用
 

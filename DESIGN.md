@@ -55,6 +55,41 @@ DevTrace 现在应明确分成四层：
 > `00_INDEX.md` 不再定义为 TraceUnit 索引；它定义为生成内容索引。  
 > `TraceUnit` 继续作为事实层存在，主要供 AI 在需要时深入读取。
 
+### 3.1 结构图
+
+```mermaid
+flowchart TD
+    A["输入材料<br/>当前会话 / 外部材料 / 用户请求"]
+    B["AI 处理"]
+
+    C["TraceUnit<br/>事件事实层"]
+    D["01_CURRENT.md<br/>当前状态"]
+    E["生成内容<br/>session summary / review / daily / weekly / monthly"]
+    F["00_INDEX.md<br/>生成内容索引<br/>日期 + 一句话 + tag"]
+
+    G["新 AI session"]
+    H["Session Loader"]
+    I["本轮 AI 工作上下文"]
+    J["继续工作"]
+
+    K["AI 自动任务<br/>定时日报 / 周报 / 月报"]
+
+    A --> B
+    B --> C
+    B --> D
+    C --> E
+    E --> F
+
+    G --> H
+    D --> H
+    F --> H
+    H --> I
+    I --> J
+    J --> B
+
+    K --> E
+```
+
 ---
 
 ## 4. 核心对象
@@ -339,6 +374,28 @@ AI 默认按这个顺序工作：
 ---
 
 ## 8. 写回流程
+
+### 8.1 流程图
+
+```mermaid
+flowchart TD
+    A["开始<br/>当前会话 / 外部材料 / 用户请求"]
+    B["AI 理解当前内容"]
+    C["判断：新事件 or 旧事件续写"]
+    D["写入 / 续写 TraceUnit"]
+    E["按需更新 01_CURRENT.md"]
+    F["如果生成了总结 / review / 日报周报月报<br/>则生成对应文件"]
+    G["把生成内容写入 00_INDEX.md"]
+    H["结束"]
+
+    A --> B
+    B --> C
+    C --> D
+    D --> E
+    E --> F
+    F --> G
+    G --> H
+```
 
 正确写回流程应是：
 
