@@ -134,60 +134,77 @@ flowchart TD
 
 ## 使用
 
+DevTrace 采用单一技能正文，同时兼容 Claude Code 与 Codex。
+
+- Claude Code：推荐使用 `/devtrace ...`
+- Codex：在已安装 `devtrace` skill 后，推荐直接要求“使用 DevTrace ...”
+- 为避免平台差异，下面每类任务分别给出 Claude Code 调用示例与通用表述示例
+
 ### 1. 记录
 
-Skill 用法：
+Claude Code：
 
-- `/skill devtrace 记录当前会话`
-- `$devtrace 记录当前进展`
+- `/devtrace 记录当前会话`
+- `/devtrace 记录当前进展`
 
-对 AI 说：
+通用表述（Claude / Codex 均可理解）：
 
-- `用 DevTrace 记录这轮工作 / 把这轮关于 loader 的推进写进 DevTrace / 把刚才这个 blocker 记到 DevTrace`
+- `使用 DevTrace 记录这轮工作`
+- `使用 DevTrace 把这轮关于 loader 的推进写进项目记录`
+- `使用 DevTrace 把刚才这个 blocker 记下来`
 
 ### 2. 续写
 
-Skill 用法：
+Claude Code：
 
-- `/skill devtrace 续写上一个 loader 事件`
-- `$devtrace 继续这个事件`
+- `/devtrace 续写上一个 loader 事件`
+- `/devtrace 继续这个事件`
 
-对 AI 说：
+通用表述（Claude / Codex 均可理解）：
 
-- `继续之前那个 loader 事件，用 DevTrace 续写 / 把这轮新进展补进上次那个事件 / 这还是同一个问题，写回原来的 TraceUnit`
+- `使用 DevTrace 续写之前那个 loader 事件`
+- `使用 DevTrace 把这轮新进展补进上次那个事件`
+- `这还是同一个问题，使用 DevTrace 写回原来的 TraceUnit`
 
 ### 3. 加载
 
-Skill 用法：
+Claude Code：
 
-- `/skill devtrace 加载当前项目上下文`
-- `$devtrace 读取 current 和 index`
+- `/devtrace 加载当前项目上下文`
+- `/devtrace 读取 current 和 index`
 
-对 AI 说：
+通用表述（Claude / Codex 均可理解）：
 
-- `用 DevTrace 加载当前项目上下文 / 先读 DevTrace 的 current 和 index / 用 DevTrace 帮我接上这个项目`
+- `使用 DevTrace 加载当前项目上下文`
+- `先读 DevTrace 的 current 和 index`
+- `使用 DevTrace 帮我接上这个项目`
 
 ### 4. 检索
 
-Skill 用法：
+Claude Code：
 
-- `/skill devtrace 查找 loader 相关事件`
-- `$devtrace 查找相关事件`
+- `/devtrace 查找 loader 相关事件`
+- `/devtrace 查找相关事件`
 
-对 AI 说：
+通用表述（Claude / Codex 均可理解）：
 
-- `用 DevTrace 找 loader 相关事件 / 看最近的 design 变化 / 追一下这个事件的前后变化`
+- `使用 DevTrace 找 loader 相关事件`
+- `看最近的 design 变化`
+- `使用 DevTrace 追一下这个事件的前后变化`
 
 ### 5. 回顾
 
-Skill 用法：
+Claude Code：
 
-- `/skill devtrace 生成本周周报`
-- `$devtrace 设置每周五生成周报`
+- `/devtrace 生成本周周报`
+- `/devtrace 设置每周五生成周报`
 
-对 AI 说：
+通用表述（Claude / Codex 均可理解）：
 
-- `用 DevTrace 生成今天的日报 / 生成本月回顾 / 以后每天晚上 9 点用 DevTrace 生成日报 / 每周五下午用 DevTrace 生成周报`
+- `使用 DevTrace 生成今天的日报`
+- `使用 DevTrace 生成本月回顾`
+- `以后每天晚上 9 点用 DevTrace 生成日报`
+- `每周五下午用 DevTrace 生成周报`
 
 一般生成的日报、周报、月报文件会放在项目目录下的 `reviews/` 中，例如 `reviews/daily/`、`reviews/weekly/`、`reviews/monthly/`。
 

@@ -37,3 +37,15 @@ DevTrace 是一个把项目推进过程沉淀成 `TraceUnit` 的 skill。该 ski
 - `scripts/`：落盘与生成脚本
 - `assets/templates/`：模板文件
 - `agents/openai.yaml`：skill 元数据
+
+
+## 双平台使用方式
+
+DevTrace 采用单一主目录维护：`Skill/devtrace/`。
+
+- Claude Code：同步到项目级 `.claude/skills/devtrace/` 后，可按 `/devtrace` 使用
+- Codex：同步到 `%USERPROFILE%\.codex\skills\devtrace\` 后，可作为本地 skill 使用
+- 如需按 Codex plugin 方式分发，可使用同目录下的 `.codex-plugin/plugin.json`
+
+仓库中的 `tools/sync_devtrace_to_claude.ps1`、`tools/sync_devtrace_to_codex.ps1` 与 `tools/sync_devtrace_all.ps1` 用于同步这两个入口。
+

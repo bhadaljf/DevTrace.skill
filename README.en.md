@@ -126,60 +126,77 @@ flowchart TD
 
 ## Usage
 
+DevTrace maintains a single skill body that works for both Claude Code and Codex.
+
+- Claude Code: recommended form is `/devtrace ...`
+- Codex: after installing the `devtrace` skill, the recommended form is natural language such as `Use DevTrace ...`
+- To avoid platform-specific ambiguity, each task below includes both a Claude Code command example and a platform-neutral phrasing
+
 ### 1. Record
 
-Skill usage:
+Claude Code:
 
-- `/skill devtrace record the current session`
-- `$devtrace record the current progress`
+- `/devtrace record the current session`
+- `/devtrace record the current progress`
 
-Say to AI:
+Platform-neutral phrasing (works for Claude and Codex):
 
-- `Use DevTrace to record this round of work / write this round of loader progress into DevTrace / record this blocker in DevTrace`
+- `Use DevTrace to record this round of work`
+- `Use DevTrace to write this round of loader progress into the project record`
+- `Use DevTrace to record this blocker`
 
 ### 2. Continue
 
-Skill usage:
+Claude Code:
 
-- `/skill devtrace continue the previous loader event`
-- `$devtrace continue this event`
+- `/devtrace continue the previous loader event`
+- `/devtrace continue this event`
 
-Say to AI:
+Platform-neutral phrasing (works for Claude and Codex):
 
-- `Continue the previous loader event with DevTrace / append this new progress to the last event / this is still the same issue, write it back to the original TraceUnit`
+- `Use DevTrace to continue the previous loader event`
+- `Use DevTrace to append this new progress to the last event`
+- `This is still the same issue, use DevTrace to write back to the original TraceUnit`
 
 ### 3. Load
 
-Skill usage:
+Claude Code:
 
-- `/skill devtrace load the current project context`
-- `$devtrace read current and index`
+- `/devtrace load the current project context`
+- `/devtrace read current and index`
 
-Say to AI:
+Platform-neutral phrasing (works for Claude and Codex):
 
-- `Use DevTrace to load the current project context / read DevTrace current and index first / use DevTrace to reconnect me to this project`
+- `Use DevTrace to load the current project context`
+- `Read DevTrace current and index first`
+- `Use DevTrace to reconnect me to this project`
 
 ### 4. Search
 
-Skill usage:
+Claude Code:
 
-- `/skill devtrace find loader-related events`
-- `$devtrace find related events`
+- `/devtrace find loader-related events`
+- `/devtrace find related events`
 
-Say to AI:
+Platform-neutral phrasing (works for Claude and Codex):
 
-- `Use DevTrace to find loader-related events / check recent design changes / trace the before-and-after changes of this event`
+- `Use DevTrace to find loader-related events`
+- `Check the recent design changes`
+- `Use DevTrace to trace the before-and-after changes of this event`
 
 ### 5. Review
 
-Skill usage:
+Claude Code:
 
-- `/skill devtrace generate this week's weekly report`
-- `$devtrace set a weekly report every Friday`
+- `/devtrace generate this week's weekly report`
+- `/devtrace set a weekly report every Friday`
 
-Say to AI:
+Platform-neutral phrasing (works for Claude and Codex):
 
-- `Use DevTrace to generate today's daily report / generate this month's review / from now on generate a daily report with DevTrace every day at 9 PM / generate a weekly report with DevTrace every Friday afternoon`
+- `Use DevTrace to generate today's daily report`
+- `Use DevTrace to generate this month's review`
+- `From now on, use DevTrace every day at 9 PM to generate a daily report`
+- `Use DevTrace every Friday afternoon to generate a weekly report`
 
 Generated daily, weekly, and monthly report files are usually placed under `reviews/` in the project directory, such as `reviews/daily/`, `reviews/weekly/`, and `reviews/monthly/`.
 

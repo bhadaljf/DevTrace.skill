@@ -1,0 +1,45 @@
+{
+  "name": "devtrace",
+  "version": "0.1.0",
+  "description": "Track AI collaboration progress as TraceUnit records, maintain current/index state, and generate periodic reviews.",
+  "author": {
+    "name": "DevTrace Team",
+    "email": "[TODO: author-email]",
+    "url": "[TODO: author-url]"
+  },
+  "homepage": "[TODO: project-homepage-url]",
+  "repository": "[TODO: repository-url]",
+  "license": "MIT",
+  "keywords": [
+    "devtrace",
+    "traceunit",
+    "ai-collaboration",
+    "session-loader",
+    "review"
+  ],
+  "skills": "./",
+  "interface": {
+    "displayName": "DevTrace",
+    "shortDescription": "沉淀 TraceUnit、维护 current/index，并支持跨会话续写与周期回顾。",
+    "longDescription": "Use DevTrace to structure AI collaboration progress into TraceUnit records, recover project context from current/index, continue long-running events across sessions, and generate session, daily, weekly, or monthly reviews.",
+    "developerName": "DevTrace Team",
+    "category": "Coding",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "[TODO: project-homepage-url]",
+    "privacyPolicyURL": "[TODO: privacy-policy-url]",
+    "termsOfServiceURL": "[TODO: terms-of-service-url]",
+    "defaultPrompt": [
+      "Use DevTrace to reconnect me to this project",
+      "Use DevTrace to record the current session",
+      "Use DevTrace to generate a review from current and index"
+    ],
+    "brandColor": "#3A5240",
+    "composerIcon": "./assets/devtrace-small.svg",
+    "logo": "./assets/devtrace-logo.png",
+    "screenshots": []
+  }
+}
